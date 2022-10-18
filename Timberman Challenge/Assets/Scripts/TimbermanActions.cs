@@ -62,6 +62,8 @@ public class TimbermanActions : MonoBehaviour
     }
 
     public void SetDead(){
+        m_scale.x = 1;
+        this.transform.localScale = m_scale;
         m_playerAnimator.SetBool("Dead", true);
         dead = true;
         m_SceneManager.GameOver();

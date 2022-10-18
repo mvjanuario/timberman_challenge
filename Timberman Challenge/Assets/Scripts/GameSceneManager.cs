@@ -39,7 +39,6 @@ public class GameSceneManager : MonoBehaviour
         if(m_currentTime <= 0){
             m_timberman.SetDead();
         }
-        Debug.Log(m_currentTime);
     }
 
     public void SetScore(int value){
