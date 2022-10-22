@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TimbermanActions : MonoBehaviour
 {
-    [SerializeField]
-    private GameSceneManager m_SceneManager;
-    [SerializeField]
-    private TreeManager m_TreeManager;
+    [Inject]
+    private GameSceneManager m_gameSceneManager;
+    [Inject]
+    private TreeManager m_treeManager;
+
     [SerializeField]
     private Animator m_playerAnimator;
     
@@ -37,22 +39,22 @@ public class TimbermanActions : MonoBehaviour
 
     private void CutTrunk(){
         SetSide();
-        if(m_currentSide == m_SceneManager.m_sideClicked && m_TreeManager.GetFirstBranchSide() == m_currentSide){
+        if(m_currentSide == m_gameSceneManager.m_sideClicked && m_treeManager.GetFirstBranchSide() == m_currentSide){
             SetDead();
         }
 
-        m_TreeManager.DestroyBranch();
+        m_treeManager.DestroyBranch();
         m_playerAnimator.SetBool("Cuting", true);
 
-        m_SceneManager.SetScore(1);
+        m_gameSceneManager.SetScore(1);
     }
 
     private void SetSide(){
-        if(m_SceneManager.m_sideClicked != m_currentSide){
-            if(m_SceneManager.m_sideClicked > 0){
+        if(m_gameSceneManager.m_sideClicked != m_currentSide){
+            if(m_gameSceneManager.m_sideClicked > 0){
                 this.transform.localPosition = new Vector3(2.75f, this.transform.localPosition.y, this.transform.localPosition.z);
                 m_currentSide = 1;
-            }else if(m_SceneManager.m_sideClicked < 0){
+            }else if(m_gameSceneManager.m_sideClicked < 0){
                 this.transform.localPosition = new Vector3(-2.75f, this.transform.localPosition.y, this.transform.localPosition.z);
                 m_currentSide = -1;
             }
@@ -66,6 +68,6 @@ public class TimbermanActions : MonoBehaviour
         this.transform.localScale = m_scale;
         m_playerAnimator.SetBool("Dead", true);
         dead = true;
-        m_SceneManager.GameOver();
+        m_gameSceneManager.GameOver();
     }
 }

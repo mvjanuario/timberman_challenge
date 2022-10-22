@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class MouseClick : MonoBehaviour
 {
-    [SerializeField]
-    private GameSceneManager m_SceneManager;
+    [Inject]
+    private GameSceneManager m_gameSceneManager;
+
     [SerializeField]
     private int side;
     
@@ -22,6 +24,6 @@ public class MouseClick : MonoBehaviour
     }
 
     private void OnMouseDown() {
-        m_SceneManager.m_sideClicked = side;
+        m_gameSceneManager.m_sideClicked = side;
     }
 }

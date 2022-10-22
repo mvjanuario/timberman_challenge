@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GameOverScreen : MonoBehaviour
 {
-    [SerializeField]
-    private GameSceneManager m_SceneManager;
+    [Inject]
+    private GameSceneManager m_gameSceneManager;
+
     [SerializeField]
     private Text m_scoreText;
     [SerializeField]
@@ -31,7 +33,7 @@ public class GameOverScreen : MonoBehaviour
     }
 
     public void Restart(){
-        m_SceneManager.RestartGame();
+        m_gameSceneManager.RestartGame();
     }
 
     public void ShowScreen(){
